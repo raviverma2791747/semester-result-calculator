@@ -151,6 +151,7 @@ public:
 
     void result()
     {
+        char sv_or_nt;
 
         cout<<"=============================================================\n";
         cout<<"                           RESULT                            \n";
@@ -162,32 +163,69 @@ public:
         cout<<"|       +----------+----------+----------+----------+       |\n";
         cout<<"|       |"<<left<<setw(10)<<"Subject"<<"|"<<left<<setw(10)<<"Marks"<<"|"<<left<<setw(10)<<"Grade"<<"|"<<"          |       |\n";
         cout<<"|       +----------+----------+----------+----------+       |\n";
-        cout<<"|       |"<<left<<setw(10)<<c.subjects[0]<<"|"<<left<<setw(10)<<marks[0]<<"|"<<left<<setw(10)<<grade(marks[0])<<"|"<<"          |       |\n";
-        cout<<"|       +----------+----------+----------+----------+       |\n";
-        cout<<"|       |"<<left<<setw(10)<<c.subjects[1]<<"|"<<left<<setw(10)<<marks[1]<<"|"<<left<<setw(10)<<grade(marks[1])<<"|"<<"          |       |\n";
-        cout<<"|       +----------+----------+----------+----------+       |\n";
-        cout<<"|       |"<<left<<setw(10)<<c.subjects[2]<<"|"<<left<<setw(10)<<marks[2]<<"|"<<left<<setw(10)<<grade(marks[2])<<"|"<<"          |       |\n";
-        cout<<"|       +----------+----------+----------+----------+       |\n";
-        cout<<"|       |"<<left<<setw(10)<<c.subjects[3]<<"|"<<left<<setw(10)<<marks[3]<<"|"<<left<<setw(10)<<grade(marks[3])<<"|"<<"          |       |\n";
-        cout<<"|       +----------+----------+----------+----------+       |\n";
-        cout<<"|       |"<<left<<setw(10)<<c.subjects[4]<<"|"<<left<<setw(10)<<marks[4]<<"|"<<left<<setw(10)<<grade(marks[4])<<"|"<<"          |       |\n";
-        cout<<"|       +----------+----------+----------+----------+       |\n";
-        cout<<"|       |"<<left<<setw(10)<<c.subjects[5]<<"|"<<left<<setw(10)<<marks[5]<<"|"<<left<<setw(10)<<grade(marks[5])<<"|"<<"          |       |\n";;
-        cout<<"|       +----------+----------+----------+----------+       |\n";
+        for(int i=0; i<c.total_subjects; i++)
+        {
+            cout<<"|       |"<<left<<setw(10)<<c.subjects[i]<<"|"<<left<<setw(10)<<marks[i]<<"|"<<left<<setw(10)<<grade(marks[i])<<"|"<<"          |       |\n";
+            cout<<"|       +----------+----------+----------+----------+       |\n";
+        }
         cout<<"+-----------------------------------------------------------+\n\n";
         cout<<"+-----------------------------------------------------------+\n";
         cout<<"|                        PRACTICAL SUBJECTS                 |\n";
         cout<<"|       +----------+----------+----------+----------+       |\n";
         cout<<"|       |"<<left<<setw(10)<<"Subject"<<"|"<<left<<setw(10)<<"Marks"<<"|"<<left<<setw(10)<<"Grade"<<"|"<<"          |       |\n";
         cout<<"|       +----------+----------+----------+----------+       |\n";
-        cout<<"|       |"<<left<<setw(10)<<c.practical_subjects[0]<<"|"<<left<<setw(10)<<practical_marks[0]<<"|"<<left<<setw(10)<<grade(practical_marks[0],1)<<"|"<<"          |       |\n";
-        cout<<"|       +----------+----------+----------+----------+       |\n";
-        cout<<"|       |"<<left<<setw(10)<<c.practical_subjects[1]<<"|"<<left<<setw(10)<<practical_marks[1]<<"|"<<left<<setw(10)<<grade(practical_marks[1],1)<<"|"<<"          |       |\n";
-        cout<<"|       +----------+----------+----------+----------+       |\n";
+        for(int i=0; i<c.total_practical_subjects; i++)
+        {
+
+            cout<<"|       |"<<left<<setw(10)<<c.practical_subjects[i]<<"|"<<left<<setw(10)<<practical_marks[i]<<"|"<<left<<setw(10)<<grade(practical_marks[i],1)<<"|"<<"          |       |\n";
+            cout<<"|       +----------+----------+----------+----------+       |\n";
+        }
         cout<<"+-----------------------------------------------------------+\n\n";
         cout<<"+--------------------+\n";
         cout<<"|  CGPA :"<<setw(5)<<cgpa<<"     |\n";
         cout<<"+--------------------+\n";
+
+        cout<<"Do you want to save the result? Y/N\n";
+        cin>>sv_or_nt;
+        if(sv_or_nt == 'y' || 'Y')
+        {
+            ofstream saver;
+            string file_name = roll_no;
+            file_name.append(".txt");
+            saver.open(file_name.c_str(),ios::out);
+            saver<<"=============================================================\n";
+            saver<<"                           RESULT                            \n";
+            saver<<"=============================================================\n\n";
+            saver<<"Name :"<<name<<"\n";
+            saver<<"Roll Number :"<<roll_no<<"\n\n";
+            saver<<"+-----------------------------------------------------------+\n";
+            saver<<"|                         THEORY SUBJECTS                   |\n";
+            saver<<"|       +----------+----------+----------+----------+       |\n";
+            saver<<"|       |"<<left<<setw(10)<<"Subject"<<"|"<<left<<setw(10)<<"Marks"<<"|"<<left<<setw(10)<<"Grade"<<"|"<<"          |       |\n";
+            saver<<"|       +----------+----------+----------+----------+       |\n";
+            for(int i=0; i<c.total_subjects; i++)
+            {
+                saver<<"|       |"<<left<<setw(10)<<c.subjects[i]<<"|"<<left<<setw(10)<<marks[i]<<"|"<<left<<setw(10)<<grade(marks[i])<<"|"<<"          |       |\n";
+                saver<<"|       +----------+----------+----------+----------+       |\n";
+            }
+            saver<<"+-----------------------------------------------------------+\n\n";
+            saver<<"+-----------------------------------------------------------+\n";
+            saver<<"|                        PRACTICAL SUBJECTS                 |\n";
+            saver<<"|       +----------+----------+----------+----------+       |\n";
+            saver<<"|       |"<<left<<setw(10)<<"Subject"<<"|"<<left<<setw(10)<<"Marks"<<"|"<<left<<setw(10)<<"Grade"<<"|"<<"          |       |\n";
+            saver<<"|       +----------+----------+----------+----------+       |\n";
+            for(int i=0; i<c.total_practical_subjects; i++)
+            {
+
+                saver<<"|       |"<<left<<setw(10)<<c.practical_subjects[i]<<"|"<<left<<setw(10)<<practical_marks[i]<<"|"<<left<<setw(10)<<grade(practical_marks[i],1)<<"|"<<"          |       |\n";
+                saver<<"|       +----------+----------+----------+----------+       |\n";
+            }
+            saver<<"+-----------------------------------------------------------+\n\n";
+            saver<<"+--------------------+\n";
+            saver<<"|  CGPA :"<<setw(5)<<cgpa<<"     |\n";
+            saver<<"+--------------------+\n";
+            saver.close();
+        }
     }
 
 
