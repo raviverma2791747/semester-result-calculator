@@ -42,20 +42,67 @@ public:
         getline(cin,name);
         cout<<"Roll Number :";
         getline(cin,roll_no);
+
         cout<<"\nTHEORY SUBJECTS\n\n";
         for(int i=0; i<c.total_subjects; i++)
         {
             cout<<left<<setw(11)<<c.subjects[i]<<" :";
             cin>>marks[i];
         }
+
+
         cout<<"\nPRACTICAL SUBJECTS\n\n";
         for(int i=0; i<c.total_practical_subjects; i++)
         {
             cout<<left<<setw(11)<<c.practical_subjects[i]<<" :";
             cin>>practical_marks[i];
         }
+
         pointer_calculator();
         cgpa_calculator();
+    }
+
+    void update(int seg=0)
+    {
+        cout<<"======================================================\n";
+        cout<<"                      UPDATE                          \n";
+        cout<<"======================================================\n";
+
+        if(seg == 1)
+        {
+            cout<<"Name        :";
+            cin >> ws;
+            getline(cin,name);
+        }
+        else if(seg == 2)
+        {
+            cout<<"Roll Number :";
+            getline(cin,roll_no);
+
+        }
+        else if(seg == 3)
+        {
+            cout<<"\nTHEORY SUBJECTS\n\n";
+            for(int i=0; i<c.total_subjects; i++)
+            {
+                cout<<left<<setw(11)<<c.subjects[i]<<" :";
+                cin>>marks[i];
+            }
+            pointer_calculator();
+            cgpa_calculator();
+        }
+        else if(seg == 4)
+        {
+            cout<<"\nPRACTICAL SUBJECTS\n\n";
+            for(int i=0; i<c.total_practical_subjects; i++)
+            {
+                cout<<left<<setw(11)<<c.practical_subjects[i]<<" :";
+                cin>>practical_marks[i];
+            }
+            pointer_calculator();
+            cgpa_calculator();
+        }
+
     }
 
     char *grade(int mark=0,int t_h=0)
@@ -417,7 +464,32 @@ int main()
             cout<<"FEATURE NOT AVAILABLE!\n";
             break;
         case 3:
-            cout<<"FEATURE NOT AVAILABLE!\n";
+            cout<<"Enter the Roll number to display the record\n";
+            cin>>roll;
+            for(int i=0; i<=total_count; i++)
+            {
+                if(roll == r[i].ret_roll())
+                {
+                    int temp_c;
+                    cout<<"What do you want to update?\n";
+                    cout<<"[1]Name\n";
+                    cout<<"[2]Roll Number\n";
+                    cout<<"[3]Theory Marks\n";
+                    cout<<"[4]Practical Marks\n";
+                    cout<<"[5]Exit\n";
+                    cin>>temp_c;
+                    if(temp_c >0 && temp_c <5)
+                    {
+                        r[i].update(temp_c);
+                    }
+                    flag = 1;
+                }
+            }
+            if(flag==0)
+            {
+                cout<<"NO RECORDS FOUND!\n";
+            }
+            break;
             break;
         case 4:
             cout<<"Enter the Roll number to display the record\n";
